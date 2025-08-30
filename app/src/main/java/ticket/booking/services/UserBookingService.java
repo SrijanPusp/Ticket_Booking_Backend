@@ -31,4 +31,22 @@ public class UserBookingService {
         }).findFirst();
         return foundUser.isPresent();
     }
+
+    public Boolean signUp(User user1){
+        try {
+            userList.add(user1);
+            saveUserListToFile();
+            return Boolean.TRUE;
+        }
+        catch (IOException ex){
+            return Boolean.FALSE;
+        }
+    }
+
+    public void  saveUserListToFile() throws IOException{
+        File usersFile = new File(USER_PATH);
+        objectMapper.writeValue(usersFile, userList);
+    }
+
+    //implement cancelBooking, fetchBooking
 }
