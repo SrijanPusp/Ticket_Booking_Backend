@@ -7,11 +7,11 @@ import java.util.Map;
 public class Train {
     private String trainID;
     private Integer trainNumber;
-    private Map<String, Time> schedule;
+    private Map<String, String> schedule;
     private List<List<Boolean>> seats;
     private List<String> stations;
 
-    public Train(String trainID, Integer trainNumber, Map<String, Time> schedule, List<List<Boolean>> seats, List<String> stations) {
+    public Train(String trainID, Integer trainNumber, Map<String, String> schedule, List<List<Boolean>> seats, List<String> stations) {
         this.trainID = trainID;
         this.trainNumber = trainNumber;
         this.schedule = schedule;
@@ -37,11 +37,11 @@ public class Train {
         this.trainNumber = trainNumber;
     }
 
-    public Map<String, Time> getSchedule() {
+    public Map<String, String> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Map<String, Time> schedule) {
+    public void setSchedule(Map<String, String> schedule) {
         this.schedule = schedule;
     }
 
