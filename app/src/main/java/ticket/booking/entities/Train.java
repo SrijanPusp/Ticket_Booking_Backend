@@ -10,4 +10,58 @@ public class Train {
     private Map<String, Time> schedule;
     private List<List<Boolean>> seats;
     private List<String> stations;
+
+    public Train(String trainID, Integer trainNumber, Map<String, Time> schedule, List<List<Boolean>> seats, List<String> stations) {
+        this.trainID = trainID;
+        this.trainNumber = trainNumber;
+        this.schedule = schedule;
+        this.seats = seats;
+        this.stations = stations;
+    }
+
+    public Train(){}
+
+    public String getTrainID() {
+        return trainID;
+    }
+
+    public void setTrainID(String trainID) {
+        this.trainID = trainID;
+    }
+
+    public Integer getTrainNumber() {
+        return trainNumber;
+    }
+
+    public void setTrainNumber(Integer trainNumber) {
+        this.trainNumber = trainNumber;
+    }
+
+    public Map<String, Time> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Map<String, Time> schedule) {
+        this.schedule = schedule;
+    }
+
+    public List<List<Boolean>> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<List<Boolean>> seats) {
+        this.seats = seats;
+    }
+
+    public List<String> getStations() {
+        return stations;
+    }
+
+    public void setStations(List<String> stations) {
+        this.stations = stations;
+    }
+
+    public String getTrainInfo(){
+        return String.format("Train ID: %s, Train Number: %s", trainID, trainNumber);
+    }
 }
