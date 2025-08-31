@@ -19,6 +19,12 @@ public class UserBookingService {
 
     private static final String USER_PATH = "app/src/main/java/ticket/booking/localDB/users.json";
 
+    public UserBookingService()throws IOException {
+        loadUserListFromFile();
+    }
+    private void loadUserListFromFile() throws IOException {
+        userList = objectMapper.readValue(new File(USER_PATH), new TypeReference<List<User>>() {});
+    }
     public UserBookingService(User user1) throws IOException {
         this.user = user1;
         File users = new File(USER_PATH);
@@ -46,6 +52,15 @@ public class UserBookingService {
     public void  saveUserListToFile() throws IOException{
         File usersFile = new File(USER_PATH);
         objectMapper.writeValue(usersFile, userList);
+    }
+
+    public void fetchBookings(){
+        Optional<User> userFetched = userList.stream().filter(user1 -> {
+            return user1.getName().equals(user.getName()) && UserServiceUtil.checkPass(user.getPassword(), user1.getHashPassword());
+        }).findFirst();
+        if(userFetched.isPresent()){
+            userFetched.get().printTickets();
+        }
     }
 
     //implement cancelBooking, fetchBooking
