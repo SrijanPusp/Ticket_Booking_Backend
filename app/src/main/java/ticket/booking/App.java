@@ -1,4 +1,4 @@
-package ticket.booking.app;
+package ticket.booking;
 
 import ticket.booking.entities.Train;
 import ticket.booking.entities.User;
@@ -6,7 +6,6 @@ import ticket.booking.services.UserBookingService;
 import ticket.booking.Util.UserServiceUtil;
 
 import java.io.IOException;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,8 +69,8 @@ public class App {
                     List<Train> trains = userBookingService.getTrains(source, dest);
                     int index = 1;
                     for (Train t: trains){
-                        System.out.println(index+" Train id : "+t.getTrainId());
-                        for (Map.Entry<String, String> entry: t.getStationTimes().entrySet()){
+                        System.out.println(index+" Train id : "+t.getTrainID());
+                        for (Map.Entry<String, String> entry: t.getSchedule().entrySet()){
                             System.out.println("station "+entry.getKey()+" time: "+entry.getValue());
                         }
                     }
