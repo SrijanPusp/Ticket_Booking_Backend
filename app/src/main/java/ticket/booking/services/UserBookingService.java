@@ -2,11 +2,13 @@ package ticket.booking.services;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ticket.booking.entities.Train;
 import ticket.booking.entities.User;
 import ticket.booking.Util.UserServiceUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,6 +64,38 @@ public class UserBookingService {
             userFetched.get().printTickets();
         }
     }
+    public List<Train> getTrains(String source, String dest){
+        try{
+            TrainService trainService = new TrainService();
+            return trainService.searchTrains(source, dest);
+        }catch(IOException ex){
+            return new ArrayList<>();
+        }
+    }
 
-    //implement cancelBooking, fetchBooking
+    public List<List<Integer>> fetchSeats(Train train){
+        return train.getSeats();
+    }
+
+    public Boolean bookTrainSeat(Train train, int row, int seat) {
+        try{
+            TrainService trainService = new TrainService();
+            List<List<Integer>> seats = train.getSeats();
+            if (row >= 0 && row < seats.size() && seat >= 0 && seat < seats.get(row).size()) {
+                if (seats.get(row).get(seat) == 0) {
+                    seats.get(row).set(seat, 1);
+                    train.setSeats(seats);
+                    trainService.addTrain(train);
+                    return true; // Booking successful
+                } else {
+                    return false; // Seat is already booked
+                }
+            } else {
+                return false; // Invalid row or seat index
+            }
+        }catch (IOException ex){
+            return Boolean.FALSE;
+        }
+    }
 }
+    //implement cancelBooking
